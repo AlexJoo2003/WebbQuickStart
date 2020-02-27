@@ -1,27 +1,12 @@
 import sys
 import os
 
+
 try:
     name = sys.argv[1]
 except:
     print("Please name your project")
     exit()
-
-if len(sys.argv) > 2:
-    flags = sys.argv[2:]
-    for flag in flags:
-        if flag not in available_flags:
-            print("Please use only these flags:")
-            print(available_flags)
-            exit()
-
-dir_path = os.getcwd()+"/"+name
-os.mkdir(dir_path)
-os.chdir(dir_path)
-
-project = Project(name, flags)
-project.Create()
-
 
 html = f'''
 <!DOCTYPE html>
@@ -58,6 +43,7 @@ bootstrapJS = [
 ]
 
 available_flags = ["-j", "-b", "-s", "-i", "-f", "--all"]
+
 
 class Project:
     def __init__(self, name, flags):
@@ -119,9 +105,25 @@ class Project:
             os.mkdir("fonts")
         
         # Remove all the placeholders
-        with open("index.html", "r"):
-            lines = f.readline()
-        with open("index.html", "w"):
-            for line in lines:
-                if not line.contains("*"):
-                    f.write(line)
+        # with open("index.html", "r") as f:
+        #     lines = f.readline()
+        # with open("index.html", "w") as f:
+        #     for line in lines:
+        #         if '*' in line:
+        #             f.write(line)
+
+
+if len(sys.argv) > 2:
+    flags = sys.argv[2:]
+    for flag in flags:
+        if flag not in available_flags:
+            print("Please use only these flags:")
+            print(available_flags)
+            exit()
+
+dir_path = os.getcwd()+"/"+name
+os.mkdir(dir_path)
+os.chdir(dir_path)
+
+project = Project(name, flags)
+project.Create()
