@@ -8,8 +8,7 @@ except:
     print("Please name your project")
     exit()
 
-html = f'''
-<!DOCTYPE html>
+html = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -105,12 +104,12 @@ class Project:
             os.mkdir("fonts")
         
         # Remove all the placeholders
-        # with open("index.html", "r") as f:
-        #     lines = f.readline()
-        # with open("index.html", "w") as f:
-        #     for line in lines:
-        #         if '*' in line:
-        #             f.write(line)
+        with open("index.html", "r") as f:
+            lines = f.readlines()
+        with open("index.html", "w") as f:
+            for line in lines:
+                if '*' not in line:
+                    f.write(line)
 
 
 if len(sys.argv) > 2:
